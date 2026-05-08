@@ -18,33 +18,29 @@ if( $_SERVER["REQUEST_METHOD"] == "POST"){
         $stmt->execute();
         $stmt->store_result();
 
-        if ($stmt->num_rows >0){
+        if ($stmt->num_rows > 0) {
             $stmt->bind_result($id, $username, $hashed_password, $role);
             $stmt->fetch();
 
             // verify password
-            if (password_verify($password, $hashed_password)){
+            if (password_verify($password, $hashed_password)) {
                 //set session variables
                 $_SESSION['user_id'] = $id;
                 $_SESSION['username'] = $username;
                 $_SESSION['role'] = $role;
             
-
                 //Redirect based on role
-                if ($_SESSION['role'] === 'admin') {
+                if ($role === 'admin') {
                     header("Location: ../admin/dashboard.php");
-                    
-                }
-                else {
+                    exit();
+                } else {
                     header("Location: ../student/dashboard.php");
+                    exit();
                 }
-                exit();
-            
             } else {
                 // handle incorrect password
                 $error = "Invalid email or password.";
             }
-
         } else {
             // handle unsupported email
             $error = "Invalid email or password.";

@@ -29,21 +29,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             
             // Automatically determine role based on keyword in email
             $role = 'student'; // Default fallback
-            if (strpos($email, 'lib') !== false) {
-                $role = 'admin';
-            } elseif (strpos($email, 'stud') !== false) {
-                $role = 'student';
-            }
             
-            $insert_stmt = $conn->prepare("INSERT INTO users (username, email, password, role) VALUES (?, ?, ?, ?)");
-            $insert_stmt->bind_param("ssss", $username, $email, $hashed_password, $role);
-            
-            if ($insert_stmt->execute()) {
-                $success = "Registration successful! You can now login.";
-            } else {
-                $error = "Something went wrong. Please try again.";
+            // Prevent users from registering as admin using 'lib' 
+            if (strpos($email, 'lib') !== false && $email !== 'angella.lib@gmail.com') {
+                $error = "use correct email address pattern.";
             }
-            $insert_stmt->close();
+
+            if (empty($error)) {
+                $insert_stmt = $conn->prepare("INSERT INTO users (username, email, password, role) VALUES (?, ?, ?, ?)");
+                $insert_stmt->bind_param("ssss", $username, $email, $hashed_password, $role);
+                
+                if ($insert_stmt->execute()) {
+                    $success = "Registration successful! You can now login.";
+                } else {
+                    $error = "Something went wrong. Please try again.";
+                }
+                $insert_stmt->close();
+            }
         }
         $stmt->close();
     }
