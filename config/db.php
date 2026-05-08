@@ -3,12 +3,12 @@
 $host= "localhost";
 $dbname= "library";
 $username= "root";
-$password ="1234";
+$password ="";
+$port = 3305;
 
 // create connection
-$conn= new mysqli($host, $username, $password,$dbname);
+$conn= new mysqli($host, $username, $password,$dbname, $port);
 // check connection
 if($conn-> connect_error){
-    die("connection failed: " .
-    $conn-> connect_error);
+    die("connection failed: " .$conn-> connect_error);
 }
