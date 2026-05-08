@@ -58,6 +58,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <link rel="stylesheet" href="../assets/style.css">
 </head>
 <body>
+    <style>
+     body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .Container {
+            margin: 0; 
+        }
+    </style>
     <div class="Container">
         <h2>Create your Account</h2>
         

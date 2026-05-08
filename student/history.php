@@ -88,9 +88,11 @@ $history_result = $stmt->get_result();
     <style>
         .nav-links { padding: 10px; background: #eee; margin-bottom: 20px; }
         .nav-links a { margin-right: 15px; text-decoration: none; color: #333; font-weight: bold; }
-        .container { padding: 20px; }
+        .container { padding: 20px; margin-left: 300px; }
         
-        table { width: 100%; border-collapse: collapse; margin-top: 15px; background: #fff; }
+        table { width: 100%; border-collapse: collapse;
+         margin-top: 15px;
+         background: #fff; }
         table, th, td { border: 1px solid #ddd; }
         th, td { padding: 12px; text-align: left; }
         th { background-color: #f4f4f4; }
@@ -100,14 +102,77 @@ $history_result = $stmt->get_result();
         
         .btn-return { display: inline-block; padding: 5px 10px; background: #28a745; color: white; text-decoration: none; border-radius: 4px; font-size: 13px; }
         .btn-return:hover { background: #218838; }
+
+        /* sidebar */
+         .sidebar{
+            width:260px;
+            height:100vh;
+            background:linear-gradient(180deg,#002366,#001845);
+            color:white;
+            position:fixed;
+            padding:25px 20px;
+        }
+
+        .logo{
+            font-size:26px;
+            font-weight:700;
+            margin-bottom:50px;
+        }
+
+        .menu a{
+            display:flex;
+            align-items:center;
+            gap:15px;
+            color:white;
+            text-decoration:none;
+            padding:15px;
+            margin-bottom:10px;
+            border-radius:12px;
+            transition:0.3s;
+        }
+
+        .menu a:hover,
+        .menu .active{
+            background:#0d6efd;
+        }
+
+        .menu i{
+            font-size:18px;
+        }
+
+        .logout{
+            position:absolute;
+            bottom:30px;
+            width:85%;
+        }
     </style>
 </head>
 <body>
+    <div class="sidebar">
 
-    <div class="nav-links">
-        <a href="dashboard.php">Catalogue</a>
-        <a href="history.php">My Borrowing History</a>
-        <a href="../auth/logout.php" style="color: red; float: right;">Logout</a>
+        <div class="logo">
+            <i class="fa-solid fa-book-open"></i> Library
+        </div>
+
+        <div class="menu">
+
+            <a href="dashboard.php" class="active">
+                <i class="fa-solid fa-house"></i>
+                <span>Dashboard</span>
+            </a>
+
+            <a href="../student/dashboard.php">
+                <i class="fa-solid fa-book"></i>
+                <span>Catalogue</span>
+            </a>
+
+            <a href="../auth/logout.php" class="logout">
+                <i class="fa-solid fa-right-from-bracket"></i>
+                <span>Logout</span>
+            </a>
+
+        </div>
+
     </div>
 
     <div class="container">

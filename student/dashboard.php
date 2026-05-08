@@ -46,7 +46,7 @@ $books_result = $stmt->get_result();
     <style>
         .nav-links { padding: 10px; background: #eee; margin-bottom: 20px; }
         .nav-links a { margin-right: 15px; text-decoration: none; color: #333; font-weight: bold; }
-        .container { padding: 20px; }
+        .container { padding: 20px; margin-left: 300px; }
         
         /* Search box styling */
         .search-container { margin-bottom: 20px; padding: 15px; background: #f9f9f9; border: 1px solid #ddd; }
@@ -62,18 +62,95 @@ $books_result = $stmt->get_result();
         .badge-available { background: #28a745; color: white; padding: 4px 8px; border-radius: 12px; font-size: 12px; font-weight: bold; }
         .badge-borrowed { background: #ffc107; color: black; padding: 4px 8px; border-radius: 12px; font-size: 12px; font-weight: bold; }
         
-        .btn-borrow { display: inline-block; padding: 6px 12px; background: #007bff; color: white; text-decoration: none; border-radius: 4px; font-size: 14px;}
-        .btn-disabled { display: inline-block; padding: 6px 12px; background: #cccccc; color: #666; cursor: not-allowed; border-radius: 4px; font-size: 14px;}
+        .btn-borrow { display: inline-block;
+         padding: 6px 12px; background: #007bff;
+          color: white; text-decoration: none;
+           border-radius: 4px; font-size: 14px;}
+        .btn-disabled { display: inline-block;
+         padding: 6px 12px; background: #cccccc; color:
+          #666; cursor: not-allowed; border-radius: 4px; 
+          font-size: 14px;
+        }
+
+        /* sidebar */
+         .sidebar{
+            width:260px;
+            height:100vh;
+            background:linear-gradient(180deg,#002366,#001845);
+            color:white;
+            position:fixed;
+            padding:25px 20px;
+        }
+
+        .logo{
+            font-size:26px;
+            font-weight:700;
+            margin-bottom:50px;
+        }
+
+        .menu a{
+            display:flex;
+            align-items:center;
+            gap:15px;
+            color:white;
+            text-decoration:none;
+            padding:15px;
+            margin-bottom:10px;
+            border-radius:12px;
+            transition:0.3s;
+        }
+
+        .menu a:hover,
+        .menu .active{
+            background:#0d6efd;
+        }
+
+        .menu i{
+            font-size:18px;
+        }
+
+        .logout{
+            position:absolute;
+            bottom:30px;
+            width:85%;
+        }
     </style>
 </head>
 <body>
+     <div class="sidebar">
 
-    <div class="nav-links">
-        <a href="dashboard.php">Catalogue</a>
-        <a href="history.php">My Borrowing History</a>
-        <a href="../auth/logout.php" style="color: red; float: right;">Logout</a>
+        <div class="logo">
+            <i class="fa-solid fa-book-open"></i> Library
+        </div>
+
+        <div class="menu">
+
+            <a href="dashboard.php" class="active">
+                <i class="fa-solid fa-house"></i>
+                <span>Dashboard</span>
+            </a>
+
+            <a href="../student/dashboard.php">
+                <i class="fa-solid fa-book"></i>
+                <span>Catalogue</span>
+            </a>
+
+            <a href="../student/history.php">
+                <i class="fa-solid fa-clock-rotate-left"></i>
+                <span>Borrowing History</span>
+            </a>
+
+            <a href="../auth/logout.php" class="logout">
+                <i class="fa-solid fa-right-from-bracket"></i>
+                <span>Logout</span>
+            </a>
+
+        </div>
+
     </div>
 
+
+   
     <div class="container">
         <h2>Welcome, <?php echo htmlspecialchars($_SESSION['username']); ?>!</h2>
         <p>Browse our collection below. You can only borrow books that are currently available.</p>

@@ -39,30 +39,112 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add Book - Admin</title>
-    <link rel="stylesheet" href="../assets/style.css">
+    <!-- <link rel="stylesheet" href="../assets/style.css"> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        .nav-links { padding: 10px; background: #eee; margin-bottom: 20px; }
-        .nav-links a { margin-right: 15px; text-decoration: none; color: #333; font-weight: bold; }
-        .form-container { max-width: 400px; margin: 20px auto; padding: 20px; border: 1px solid #ccc; border-radius: 5px; background-color: #f9f9f9; }
-        .form-group { margin-bottom: 15px; }
-        .form-group label { display: block; margin-bottom: 5px; font-weight: bold; }
-        .form-group input { width: 100%; padding: 8px; box-sizing: border-box; }
-        button { padding: 10px 15px; background: #007bff; color: white; border: none; cursor: pointer; border-radius: 4px; }
-        button:hover { background: #0056b3; }
+        body { background-color: #f4f7fc; margin: 0; font-family: 'Poppins', sans-serif; }
+        
+        .main-content { margin-left: 280px; width: calc(100% - 280px); box-sizing: border-box; padding: 40px; }
+        .main-content h2 { color: #002366; font-size: 28px; margin-bottom: 20px; text-align: center; }
+
+        .form-container { 
+            max-width: 500px; 
+            margin: 0 auto; 
+            padding: 30px; 
+            border-radius: 12px; 
+            background-color: #fff; 
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; margin-bottom: 8px; font-weight: 500; color: #555; }
+        .form-group input { width: 100%; padding: 12px; box-sizing: border-box; border: 1px solid #ddd; border-radius: 8px; font-size: 14px; transition: 0.3s; }
+        .form-group input:focus { border-color: #007bff; outline: none; box-shadow: 0 0 0 3px rgba(0,123,255,0.1); }
+        
+        form button { width: 100%; padding: 12px; background: #0d6efd; color: white; border: none; cursor: pointer; border-radius: 8px; font-size: 16px; font-weight: 600; transition: background 0.3s; margin-top: 10px; }
+        form button:hover { background: #0056b3; }
+
+         .sidebar{
+            width:260px;
+            height:92vh;
+            background:linear-gradient(180deg,#002366,#001845);
+            color:white;
+            position:fixed;
+            padding:25px 20px;
+        }
+
+        .logo{
+            font-size:26px;
+            font-weight:700;
+            margin-bottom:50px;
+        }
+
+        .menu a{
+            display:flex;
+            align-items:center;
+            gap:15px;
+            color:white;
+            text-decoration:none;
+            padding:15px;
+            margin-bottom:10px;
+            border-radius:12px;
+            transition:0.3s;
+        }
+
+        .menu a:hover,
+        .menu .active{
+            background:#0d6efd;
+        }
+
+        .menu i{
+            font-size:18px;
+        }
+
+        .logout{
+            position:absolute;
+            bottom:30px;
+            width:85%;
+        }
     </style>
 </head>
 <body>
+    <div class="sidebar">
 
-    <div class="nav-links">
-        <a href="dashboard.php">Dashboard</a>
-        <a href="add_book.php">Add New Book</a>
-        <a href="manage_book.php">Manage Books</a>
-        <a href="borrow_records.php">Borrowing Records</a>
-        <a href="../auth/logout.php" style="color: red; float: right;">Logout</a>
+        <div class="logo">
+            <i class="fa-solid fa-book-open"></i> Library
+        </div>
+
+        <div class="menu">
+            <a href="dashboard.php">
+                <i class="fa-solid fa-house"></i>
+                <span>Dashboard</span>
+            </a>
+
+            <a href="add_book.php" class="active">
+                <i class="fa-solid fa-plus"></i>
+                <span>Add Book</span>
+            </a>
+
+            <a href="manage_book.php">
+                <i class="fa-solid fa-book"></i>
+                <span>Manage Books</span>
+            </a>
+
+            <a href="borrow_records.php">
+                <i class="fa-solid fa-clock-rotate-left"></i>
+                <span>Borrow Records</span>
+            </a>
+           
+            <a href="../auth/logout.php" class="logout">
+                <i class="fa-solid fa-right-from-bracket"></i>
+                <span>Logout</span>
+            </a>
+        </div>
+
     </div>
 
-    <div class="Container">
-        <h2 style="text-align: center;">Add a New Book</h2>
+    <div class="main-content">
+        <h2>Add a New Book</h2>
 
         <div class="form-container">
             <!-- Ensure message success/error is displayed -->

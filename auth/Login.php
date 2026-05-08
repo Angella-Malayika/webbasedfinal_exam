@@ -65,6 +65,17 @@ if( $_SERVER["REQUEST_METHOD"] == "POST"){
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login page</title>
     <link rel="stylesheet" href="../assets/style.css">
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .Container {
+            margin: 0; /* Reset margin since flex centering is used */
+        }
+    </style>
 </head>
 
 <body>
