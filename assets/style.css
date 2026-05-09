@@ -313,3 +313,28 @@ button[type="submit"]:hover {
             }
 
         }
+        /* footer */
+        .custom-footer {
+        background: linear-gradient(180deg, #002366, #001845);
+        color: #ffffff;
+        padding: 40px 0 20px;
+        margin-top: auto;
+    }
+    .footer-link {
+        color: #adb5bd;
+        text-decoration: none;
+        transition: color 0.3s;
+    }
+    .footer-link:hover {
+        color: #ffffff;
+        text-decoration: underline;
+    }
+    .social-icons a {
+        color: #adb5bd;
+        font-size: 1.2rem;
+        margin-right: 15px;
+        transition: color 0.3s;
+    }
+    .social-icons a:hover {
+        color: #0d6efd;
+    }

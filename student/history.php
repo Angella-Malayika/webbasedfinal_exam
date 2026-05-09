@@ -296,6 +296,7 @@ $history_result = $stmt->get_result();
             </tbody>
         </table>
     </div>
+    
 
 </body>
 
@@ -303,3 +304,4 @@ $history_result = $stmt->get_result();
 <?php
 $stmt->close();
 ?>
+

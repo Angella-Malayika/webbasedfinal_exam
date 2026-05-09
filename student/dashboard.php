@@ -42,7 +42,6 @@ $books_result = $stmt->get_result();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Student Dashboard - Library System</title>
-    <!-- <link rel="stylesheet" href="../assets/style.css"> -->
     <style>
         .nav-links { padding: 10px; background: #eee; margin-bottom: 20px; }
         .nav-links a { margin-right: 15px; text-decoration: none; color: #333; font-weight: bold; }
