@@ -36,21 +36,45 @@ $records_result = $conn->query($query);
     <title>All Borrowing Records - Admin</title>
     <link rel="stylesheet" href="../assets/style.css">
     <style>
-        .nav-links { padding: 10px; background: #eee; margin-bottom: 20px; }
-        .nav-links a { margin-right: 15px; text-decoration: none; color: #333; font-weight: bold; }
-        .table-container { padding: 50px; margin-left: 280px; width: calc(100% - 280px); box-sizing: border-box; }
+        .nav-links {
+        padding: 10px; 
+        background: #eee; 
+        margin-bottom: 20px; }
+        .nav-links a {
+         margin-right: 15px; 
+        text-decoration: none;
+         color: #333; 
+        font-weight: bold; }
+        .table-container { padding: 50px; 
+        margin-left: 280px;
+        width: calc(100% - 280px); 
+        box-sizing: border-box; }
          .table-container, h2, p{
             padding: 20px;
 
          }
         
-        table { width: 100%; border-collapse: collapse; margin-top: 15px; background: #fff; }
-        table, th, td { border: 1px solid #ddd; }
+        table { width: 100%; 
+        border-collapse: collapse;
+         margin-top: 15px; background: #fff; }
+        table, th, td { 
+        border: 1px solid #ddd; }
         th, td { padding: 12px; text-align: left; }
         th { background-color: #f4f4f4; }
         
-        .badge-returned { background: #28a745; color: white; padding: 4px 8px; border-radius: 12px; font-size: 12px; font-weight: bold; }
-        .badge-borrowed { background: #ffc107; color: black; padding: 4px 8px; border-radius: 12px; font-size: 12px; font-weight: bold; }
+        .badge-returned { background: #28a745; 
+        color: white; 
+        padding: 4px 8px;
+         border-radius: 12px; 
+         font-size: 12px; 
+         font-weight: bold; }
+        .badge-borrowed {
+         background: #ffc107;
+         color: black; 
+         padding: 4px 8px; 
+         border-radius: 12px; 
+         font-size: 12px; 
+         font-weight: bold; }
 
          .sidebar{
             width:260px;
