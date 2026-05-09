@@ -9,6 +9,38 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin') {
 
 include_once '../config/db.php';
 
+// Handle setting of return date
+$message = '';
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['set_return_date'])) {
+    $record_id = intval($_POST['record_id']);
+    $return_date = $_POST['return_date'];
+    
+    // Fetch borrow_date to validate minimum days
+    $check_stmt = $conn->prepare("SELECT borrow_date FROM borrow_records WHERE id = ?");
+    $check_stmt->bind_param("i", $record_id);
+    $check_stmt->execute();
+    $result = $check_stmt->get_result();
+    if ($row = $result->fetch_assoc()) {
+        $borrow_date = new DateTime($row['borrow_date']);
+        $assigned_date = new DateTime($return_date);
+        $interval = $borrow_date->diff($assigned_date);
+        
+        if ($assigned_date >= $borrow_date && $interval->days >= 7) {
+            $update_stmt = $conn->prepare("UPDATE borrow_records SET return_date = ? WHERE id = ?");
+            $update_stmt->bind_param("si", $return_date, $record_id);
+            if ($update_stmt->execute()) {
+                $message = "<div style='color: green; background: #dfd; padding: 10px; margin-bottom: 10px;'>Return date assigned successfully.</div>";
+            } else {
+                $message = "<div style='color: red; background: #fdd; padding: 10px; margin-bottom: 10px;'>Error assigning return date.</div>";
+            }
+            $update_stmt->close();
+        } else {
+            $message = "<div style='color: red; background: #fdd; padding: 10px; margin-bottom: 10px;'>The return date must be at least 7 days after the borrow date.</div>";
+        }
+    }
+    $check_stmt->close();
+}
+
 // Prepare a complex query linking borrow_records with books AND users
 // We use INNER JOINs to pull down readable names instead of raw IDs.
 $query = "
@@ -169,6 +201,8 @@ $records_result = $conn->query($query);
         <h2>All Borrowing Activity</h2>
         
         <p>This page lists all books currently checked out and historic returns.</p>
+        
+        <?php echo $message; ?>
 
         <table>
             <thead>
@@ -177,8 +211,9 @@ $records_result = $conn->query($query);
                     <th>Student Name</th>
                     <th>Book Title</th>
                     <th>Borrow Date</th>
-                    <th>Returned Date</th>
+                    <th>Assigned/Return Date</th>
                     <th>Status</th>
+                    <th>Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -194,7 +229,7 @@ $records_result = $conn->query($query);
                                     if ($row['return_date']) {
                                         echo date('M d, Y', strtotime($row['return_date']));
                                     } else {
-                                        echo "<span style='color: #888;'>Not returned yet</span>";
+                                        echo "<span style='color: #888;'>Not assigned</span>";
                                     }
                                 ?>
                             </td>
@@ -202,19 +237,32 @@ $records_result = $conn->query($query);
                                 <?php if ($row['status'] === 'returned'): ?>
                                     <span class="badge-returned">Returned</span>
                                 <?php else: ?>
-                                    <span class="badge-borrowed">Active Loan</span>
+                                    <span class="badge-borrowed">Borrowed</span>
+                                <?php endif; ?>
+                            </td>
+                            <td>
+                                <?php if ($row['status'] === 'borrowed' && !$row['return_date']): ?>
+                                    <form method="POST" style="margin: 0; display: flex; gap: 5px;">
+                                        <input type="hidden" name="record_id" value="<?php echo $row['record_id']; ?>">
+                                        <?php 
+                                            // Calculate minimum date (7 days from borrow date)
+                                            $min_date = date('Y-m-d\TH:i', strtotime($row['borrow_date'] . ' + 7 days'));
+                                        ?>
+                                        <input type="datetime-local" name="return_date" required min="<?php echo $min_date; ?>" style="padding: 4px; border: 1px solid #ccc; border-radius: 4px;">
+                                        <button type="submit" name="set_return_date" style="padding: 4px 8px; background: #002366; color: white; border: none; border-radius: 4px; cursor: pointer;">Assign</button>
+                                    </form>
                                 <?php endif; ?>
                             </td>
                         </tr>
                     <?php endwhile; ?>
                 <?php else: ?>
                     <tr>
-                        <td colspan="6" style="text-align: center; padding: 20px;">No borrowing activity found yet.</td>
+                        <td colspan="7" style="text-align: center;">No borrowing records found.</td>
                     </tr>
                 <?php endif; ?>
             </tbody>
         </table>
     </div>
-
+    
 </body>
 </html>
