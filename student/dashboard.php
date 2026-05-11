@@ -42,32 +42,80 @@ $books_result = $stmt->get_result();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Student Dashboard - Library System</title>
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
     <style>
-        .nav-links { padding: 10px; background: #eee; margin-bottom: 20px; }
-        .nav-links a { margin-right: 15px; text-decoration: none; color: #333; font-weight: bold; }
+        .nav-links { 
+            padding: 10px; 
+            background: #eee; 
+            margin-bottom: 20px; }
+        .nav-links a { 
+            margin-right: 15px;
+            text-decoration: none;
+            color: #333; 
+            font-weight: bold; }
         .container { padding: 20px; margin-left: 300px; }
         
         /* Search box styling */
-        .search-container { margin-bottom: 20px; padding: 15px; background: #f9f9f9; border: 1px solid #ddd; }
-        .search-container input[type="text"] { padding: 8px; width: 300px; border: 1px solid #ccc; border-radius: 4px; }
-        .search-container button { padding: 8px 15px; background: #007bff; color: white; border: none; cursor: pointer; border-radius: 4px; }
-        .search-container a.clear-btn { margin-left:10px; text-decoration: none; color: #888; border: 1px solid #ccc; padding: 7px 12px; border-radius:4px;}
+        .search-container {
+             margin-bottom: 20px; 
+             padding: 15px; background: #f9f9f9; 
+             border: 1px solid #ddd; }
+        .search-container input[type="text"] { 
+            padding: 8px; 
+            width: 300px; 
+            border: 1px solid #ccc; 
+            border-radius: 4px; }
+        .search-container button { 
+            padding: 8px 15px; 
+            background: #007bff; 
+            color: white; 
+            border: none; 
+            cursor: pointer; 
+            border-radius: 4px; }
+        .search-container a.clear-btn { 
+            margin-left:10px; 
+            text-decoration: none; 
+            color: #888; 
+            border: 1px solid #ccc; 
+            padding: 7px 12px; 
+            border-radius:4px;}
 
-        table { width: 100%; border-collapse: collapse; margin-top: 15px; background: #fff; }
+        table {
+             width: 100%; 
+             border-collapse: collapse; 
+             margin-top: 15px; 
+             background: #fff; }
         table, th, td { border: 1px solid #ddd; }
         th, td { padding: 12px; text-align: left; }
         th { background-color: #f4f4f4; }
         
-        .badge-available { background: #28a745; color: white; padding: 4px 8px; border-radius: 12px; font-size: 12px; font-weight: bold; }
-        .badge-borrowed { background: #ffc107; color: black; padding: 4px 8px; border-radius: 12px; font-size: 12px; font-weight: bold; }
+        .badge-available {
+             background: #28a745; 
+             color: white;
+              padding: 4px 8px; 
+              border-radius: 12px; 
+              font-size: 12px; 
+              font-weight: bold; }
+        .badge-borrowed {
+             background: #ffc107;
+             color: black; 
+             padding: 4px 8px; 
+             border-radius: 12px; 
+             font-size: 12px; 
+             font-weight: bold; }
         
         .btn-borrow { display: inline-block;
-         padding: 6px 12px; background: #007bff;
-          color: white; text-decoration: none;
-           border-radius: 4px; font-size: 14px;}
+         padding: 6px 12px; 
+         background: #007bff;
+         color: white; text-decoration: none;
+         border-radius: 4px; font-size: 14px;}
         .btn-disabled { display: inline-block;
-         padding: 6px 12px; background: #cccccc; color:
-          #666; cursor: not-allowed; border-radius: 4px; 
+         padding: 6px 12px; 
+         background: #cccccc; 
+         color:#666; 
+         cursor: not-allowed;
+          border-radius: 4px; 
           font-size: 14px;
         }
 
@@ -127,11 +175,6 @@ $books_result = $stmt->get_result();
             <a href="dashboard.php" class="active">
                 <i class="fa-solid fa-house"></i>
                 <span>Dashboard</span>
-            </a>
-
-            <a href="../student/dashboard.php">
-                <i class="fa-solid fa-book"></i>
-                <span>Catalogue</span>
             </a>
 
             <a href="../student/history.php">

@@ -42,10 +42,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <!-- <link rel="stylesheet" href="../assets/style.css"> -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        body { background-color: #f4f7fc; margin: 0; font-family: 'Poppins', sans-serif; }
+        body { 
+        background-color: #f4f7fc; 
+        margin: 0; 
+        font-family: 'Poppins', sans-serif; }
         
-        .main-content { margin-left: 280px; width: calc(100% - 280px); box-sizing: border-box; padding: 40px; }
-        .main-content h2 { color: #002366; font-size: 28px; margin-bottom: 20px; text-align: center; }
+        .main-content { margin-left: 280px; 
+        width: calc(100% - 280px); 
+        box-sizing: border-box; 
+        padding: 40px; }
+        .main-content h2 { color: #002366; 
+        font-size: 28px; 
+        margin-bottom: 20px;
+        text-align: center; }
 
         .form-container { 
             max-width: 500px; 
